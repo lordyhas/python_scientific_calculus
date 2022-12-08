@@ -15,9 +15,9 @@ global ap
 global bi
 global SIZE_OF_VALUE_ENTRY
 
-SIZE_OF_VALUE_ENTRY = 0
+#SIZE_OF_VALUE_ENTRY = 0
 SIZE_OF_VALUE = 50
-isCursorOnX = True
+#isCursorOnX = True
 
 listOfValueObs = ['#'] * SIZE_OF_VALUE
 listOfValueXi = ['#'] * SIZE_OF_VALUE
@@ -78,13 +78,14 @@ class Dialog:
     # def tonotinfo(): messagebox.showinfo("Pas d'info","C'est ne pas fonctionnel pour l'intant")
 
 
-def get_value_list(L):
+def get_value_list(array):
+
     T = []
     print("####### ", SIZE_OF_VALUE_ENTRY)
 
     try:
         for i in range(SIZE_OF_VALUE_ENTRY):
-            T.append(float(L[i].get()))
+            T.append(float(array[i].get()))
         print("List : ", T)
         return T
     except Exception as e:
@@ -101,11 +102,11 @@ def stat_bivar(parent_screen):
             global ap
             global bi
 
-            yiList = get_value_list(listOfValueYi)
-            xiList = get_value_list(listOfValueXi)
+            yi_list = get_value_list(listOfValueYi)
+            xi_list = get_value_list(listOfValueXi)
 
-            x = np.array(xiList)
-            y = np.array(yiList)
+            x = np.array(xi_list)
+            y = np.array(yi_list)
 
             fig, axs = plt.subplots(2, 1, figsize=(5, 7), constrained_layout=True)
             fig.suptitle('Graphique et interpretation', fontsize=16)
@@ -136,10 +137,10 @@ def stat_bivar(parent_screen):
             # plt.show()
 
         @classmethod
-        def sum_list(cls, L):
-            if (len(L) > 0):
+        def sum_list(cls, array):
+            if (len(array) > 0):
                 r = 0
-                for i in L:
+                for i in array:
                     r += i
                 return r
             else:
@@ -147,21 +148,21 @@ def stat_bivar(parent_screen):
 
         @classmethod
         def corref(cls):
-            yiList = get_value_list(listOfValueYi)
-            xiList = get_value_list(listOfValueXi)
+            yi_list = get_value_list(listOfValueYi)
+            xi_list = get_value_list(listOfValueXi)
             n = SIZE_OF_VALUE_ENTRY
 
             xi_sqrt = cls.xi_sqrt()
             yi_sqrt = 0
             xy = cls.xy()
 
-            for i in yiList: yi_sqrt += (i * i)
+            for i in yi_list: yi_sqrt += (i * i)
 
-            xiSum = cls.sum_list(xiList)
-            yiSum = cls.sum_list(yiList)
-            racineX = math.sqrt(xi_sqrt - (xiSum ** 2) / n)
-            racineY = math.sqrt(yi_sqrt - (yiSum ** 2) / n)
-            value = (xy - (xiSum * yiSum) / n) / (racineX * racineY)
+            xi_sum = cls.sum_list(xi_list)
+            yi_sum = cls.sum_list(yi_list)
+            racine_x = math.sqrt(xi_sqrt - (xi_sum ** 2) / n)
+            racine_y = math.sqrt(yi_sqrt - (yi_sum ** 2) / n)
+            value = (xy - (xi_sum * yi_sum) / n) / (racine_x * racine_y)
             print('+-----+ :', value)
 
             # resultFrame4.grid(row=5, column=2, columnspan=2)
@@ -172,13 +173,13 @@ def stat_bivar(parent_screen):
         @classmethod
         def intercept(cls, pente):
 
-            yiList = get_value_list(listOfValueYi)
-            xiList = get_value_list(listOfValueXi)
-            xiSum = cls.sum_list(xiList)
-            yiSum = cls.sum_list(yiList)
+            yi_list = get_value_list(listOfValueYi)
+            xi_list = get_value_list(listOfValueXi)
+            xi_sum = cls.sum_list(xi_list)
+            yi_sum = cls.sum_list(yi_list)
             n = SIZE_OF_VALUE_ENTRY
 
-            value = (yiSum / n) - (pente * (xiSum / n))
+            value = (yi_sum / n) - (pente * (xi_sum / n))
 
             intercept_label.config(text="b = {:.3f}".format(value))
 
@@ -188,14 +189,14 @@ def stat_bivar(parent_screen):
         def pente(cls):
             xi_sqrt = cls.xi_sqrt()
             xy = cls.xy()
-            yiList = get_value_list(listOfValueYi)
-            xiList = get_value_list(listOfValueXi)
+            yi_list = get_value_list(listOfValueYi)
+            xi_list = get_value_list(listOfValueXi)
 
-            xiSum = cls.sum_list(xiList)
-            yiSum = cls.sum_list(yiList)
+            xi_sum = cls.sum_list(xi_list)
+            yi_sum = cls.sum_list(yi_list)
             n = SIZE_OF_VALUE_ENTRY
 
-            value = (xy - (xiSum * yiSum) / n) / (xi_sqrt - (xiSum ** 2) / n)
+            value = (xy - (xi_sum * yi_sum) / n) / (xi_sqrt - (xi_sum ** 2) / n)
 
             pente_label.config(text="a = {:.3f}".format(value))
 
@@ -203,33 +204,33 @@ def stat_bivar(parent_screen):
 
         @classmethod
         def xy(cls, ):
-            yiList = get_value_list(listOfValueYi)
-            xiList = get_value_list(listOfValueXi)
+            yi_list = get_value_list(listOfValueYi)
+            xi_list = get_value_list(listOfValueXi)
             print("xyL :", get_value_list(listOfValueXi))
             T = []
 
             for i in range(SIZE_OF_VALUE_ENTRY):
-                xyFrameLabel[i].config(text="{:.1f}".format(xiList[i] * yiList[i]))
-                # xyLabel[i].config(text="{:.1f}".format(xiList[i]*yiList[i]))
-                T.append(xiList[i] * yiList[i])
+                xyFrameLabel[i].config(text="{:.1f}".format(xi_list[i] * yi_list[i]))
+                # xyLabel[i].config(text="{:.1f}".format(xi_list[i]*yi_list[i]))
+                T.append(xi_list[i] * yi_list[i])
 
-            xySum = cls.sum_list(T)
-            print("xySum :", xySum)
-            xy_frame_label_result.config(text="{:.2f}".format(xySum))
-            # xyLabelResult.config(text="{:.2f}".format(xySum))
+            xy_sum = cls.sum_list(T)
+            print("xy_sum :", xy_sum)
+            xy_frame_label_result.config(text="{:.2f}".format(xy_sum))
+            # xyLabelResult.config(text="{:.2f}".format(xy_sum))
 
-            return xySum
+            return xy_sum
 
         @classmethod
         def xi_sqrt(cls):
             xi_list = get_value_list(listOfValueXi)
             print("XiL :", get_value_list(listOfValueXi))
-            T = []
+            array = []
 
             for i in range(SIZE_OF_VALUE_ENTRY):
                 xi_sqrtLabel[i].config(text=f"{xi_list[i] * xi_list[i]}")
-                T.append(xi_list[i] * xi_list[i])
-            xi_sqrt_sum = cls.sum_list(T)
+                array.append(xi_list[i] * xi_list[i])
+            xi_sqrt_sum = cls.sum_list(array)
             print("xi_sqrt_sum :", xi_sqrt_sum)
             xi_sqrt_label_result.config(text="{:.2f}".format(xi_sqrt_sum))
 
@@ -237,7 +238,7 @@ def stat_bivar(parent_screen):
 
         @classmethod
         def covariance(cls):
-            xi_sqrt = cls.xi_sqrt()
+            xi_sqrt_ = cls.xi_sqrt()
             xy = cls.xy()
             yi_list = get_value_list(listOfValueYi)
             xi_list = get_value_list(listOfValueXi)
@@ -272,13 +273,13 @@ def stat_bivar(parent_screen):
             sum_yi_label.config(text=f"{yi_sum}")
             sum_xi_label.config(text=f"{xi_sum}")
 
-    def get_value_list(L):
+    def get_value_list(array):
         T = []
         print("####### ", SIZE_OF_VALUE_ENTRY)
 
         try:
             for i in range(SIZE_OF_VALUE_ENTRY):
-                T.append(float(L[i].get()))
+                T.append(float(array[i].get()))
             print("List : ", T)
             return T
         except Exception as e:
@@ -292,7 +293,7 @@ def stat_bivar(parent_screen):
         else:
             listOfValueYi[index].focus_set()
 
-    def downListener():
+    def down_listener():
         global focusIndex
         global isCursorOnX
         global SIZE_OF_VALUE_ENTRY
@@ -349,7 +350,7 @@ def stat_bivar(parent_screen):
             btn_start.config(text="Relancer")
             listOfValueXi[0].focus_set()
 
-            ww.bind('<Down>', lambda e: downListener())
+            ww.bind('<Down>', lambda e: down_listener())
             ww.bind('<Up>', lambda e: up_listener())
             ww.bind('<Left>', lambda e: left_listener())
             ww.bind('<Right >', lambda e: right_listener())

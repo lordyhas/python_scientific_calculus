@@ -47,7 +47,7 @@ def main_proba(ww):  # grid(rpassow=0,column=0,columnspan=5, pady=(5,5), padx=(1
     bn = IntVar()
     bp = DoubleVar()
 
-    cbBProb = IntVar(value=1)
+    cb_b_prob = IntVar(value=1)
 
     Label(binomial_frame, text="n: ").grid(row=0, column=0, padx=5, pady=5)
     entry_bn = Entry(binomial_frame, textvariable=bn, width=5)
@@ -63,7 +63,7 @@ def main_proba(ww):  # grid(rpassow=0,column=0,columnspan=5, pady=(5,5), padx=(1
     entry_bk.grid(row=0, column=5, padx=5, pady=5)
 
     def visibility_binomial():
-        if cbBProb.get() == 0:
+        if cb_b_prob.get() == 0:
             entry_bk.grid_remove()
             label_bk.grid_remove()
         else:
@@ -73,7 +73,7 @@ def main_proba(ww):  # grid(rpassow=0,column=0,columnspan=5, pady=(5,5), padx=(1
     choice_label_binomial = LabelFrame(binomial_frame, text='Choix resultat')
     choice_label_binomial.grid(row=1, column=0, padx=5, pady=5, columnspan=5, sticky=W)
 
-    check_button_b_prob = Checkbutton(choice_label_binomial, text='Probabilite', variable=cbBProb, onvalue=1, offvalue=0,
+    check_button_b_prob = Checkbutton(choice_label_binomial, text='Probabilite', variable=cb_b_prob, onvalue=1, offvalue=0,
                                    command=visibility_binomial)
     check_button_b_prob.grid(row=0, column=0, padx=5, pady=5)
 
@@ -94,7 +94,7 @@ def main_proba(ww):  # grid(rpassow=0,column=0,columnspan=5, pady=(5,5), padx=(1
         result_variable_b_esp.set(value=Binomiale.esperence(bn.get(), bp.get()))
 
         result_binom_frame.grid(row=2, column=0, padx=5, pady=5, columnspan=5, sticky=W)
-        if cbBProb.get() == 1:
+        if cb_b_prob.get() == 1:
             label_b_prob.config(text=f"P(X= {bk.get()}): ")
             result_variable_b_prob.set(value=Binomiale.binomiale(bk.get(), bn.get(), bp.get()))
             label_b_prob.grid(row=0, column=0, padx=5, pady=5)
@@ -126,21 +126,21 @@ def main_proba(ww):  # grid(rpassow=0,column=0,columnspan=5, pady=(5,5), padx=(1
 
     #############################################################################################################
     # Poisson
-    poissonFrame = LabelFrame(scrollable_frame, text="Distribution de Poisson", font='Helvetica 10 bold', borderwidth=1)
-    poissonFrame.grid(row=2, column=0, padx=20, pady=5, sticky=W)
+    poisson_frame = LabelFrame(scrollable_frame, text="Distribution de Poisson", font='Helvetica 10 bold', borderwidth=1)
+    poisson_frame.grid(row=2, column=0, padx=20, pady=5, sticky=W)
 
     pl = DoubleVar()
     pk = IntVar()
 
-    Label(poissonFrame, text="l: ").grid(row=0, column=0, padx=5, pady=5)
-    entry_pl = Entry(poissonFrame, textvariable=pl, width=5)
+    Label(poisson_frame, text="l: ").grid(row=0, column=0, padx=5, pady=5)
+    entry_pl = Entry(poisson_frame, textvariable=pl, width=5)
     entry_pl.grid(row=0, column=1, padx=5, pady=5)
 
-    Label(poissonFrame, text="k: ").grid(row=0, column=2, padx=5, pady=5)
-    entry_pk = Entry(poissonFrame, textvariable=pk, width=5)
+    Label(poisson_frame, text="k: ").grid(row=0, column=2, padx=5, pady=5)
+    entry_pk = Entry(poisson_frame, textvariable=pk, width=5)
     entry_pk.grid(row=0, column=3, padx=5, pady=5)
 
-    result_poisson_frame = LabelFrame(poissonFrame, text="Resultat")
+    result_poisson_frame = LabelFrame(poisson_frame, text="Resultat")
 
     result_variable_p_prob = StringVar()
     result_variable_p_var = StringVar()
@@ -168,31 +168,31 @@ def main_proba(ww):  # grid(rpassow=0,column=0,columnspan=5, pady=(5,5), padx=(1
         entry_pl.delete(0, 'end')
         result_poisson_frame.grid_forget()
 
-    Button(poissonFrame, text='Effectuer', fg='blue', command=effectuer_poisson).grid(row=0, column=4, padx=5, pady=5)
-    Button(poissonFrame, text='Effacer', fg='red', command=effacer_poisson).grid(row=0, column=5, padx=5, pady=5)
+    Button(poisson_frame, text='Effectuer', fg='blue', command=effectuer_poisson).grid(row=0, column=4, padx=5, pady=5)
+    Button(poisson_frame, text='Effacer', fg='red', command=effacer_poisson).grid(row=0, column=5, padx=5, pady=5)
 
-    Label(poissonFrame, text="k: Nombre de succes, l : nombre moyen", fg='blue').grid(row=2, column=0, padx=5, pady=5,
+    Label(poisson_frame, text="k: Nombre de succes, l : nombre moyen", fg='blue').grid(row=2, column=0, padx=5, pady=5,
                                                                                       columnspan=6, sticky=W)
     #############################################################################################################
     # Geometric
-    geoFrame = LabelFrame(scrollable_frame, text="Distribution geometrique", font='Helvetica 10 bold', borderwidth=1)
-    geoFrame.grid(row=3, column=0, padx=20, pady=5, sticky=W)
+    geo_frame = LabelFrame(scrollable_frame, text="Distribution geometrique", font='Helvetica 10 bold', borderwidth=1)
+    geo_frame.grid(row=3, column=0, padx=20, pady=5, sticky=W)
 
     gk = IntVar()
     gp = DoubleVar()
 
-    Label(geoFrame, text="p: ").grid(row=0, column=0, padx=5, pady=5)
-    entry_gp = Entry(geoFrame, textvariable=gp, width=5)
+    Label(geo_frame, text="p: ").grid(row=0, column=0, padx=5, pady=5)
+    entry_gp = Entry(geo_frame, textvariable=gp, width=5)
     entry_gp.grid(row=0, column=1, padx=5, pady=5)
 
-    Label(geoFrame, text="k: ").grid(row=0, column=2, padx=5, pady=5)
-    entry_gk = Entry(geoFrame, textvariable=gk, width=5)
+    Label(geo_frame, text="k: ").grid(row=0, column=2, padx=5, pady=5)
+    entry_gk = Entry(geo_frame, textvariable=gk, width=5)
     entry_gk.grid(row=0, column=3, padx=5, pady=5)
 
-    choix_label_geo = LabelFrame(geoFrame, text='Choix resultat')
+    choix_label_geo = LabelFrame(geo_frame, text='Choix resultat')
     choix_label_geo.grid(row=1, column=0, padx=5, pady=5, columnspan=5, sticky=W)
 
-    result_geo_frame = LabelFrame(geoFrame, text="Resultat")
+    result_geo_frame = LabelFrame(geo_frame, text="Resultat")
 
     result_variable_g_prob = StringVar()
     result_variable_g_var = StringVar()
@@ -220,10 +220,10 @@ def main_proba(ww):  # grid(rpassow=0,column=0,columnspan=5, pady=(5,5), padx=(1
         entry_gp.delete(0, 'end')
         result_geo_frame.grid_forget()
 
-    Button(geoFrame, text='Effectuer', fg='blue', command=effectuerGeo).grid(row=0, column=4, padx=5, pady=5)
-    Button(geoFrame, text='Effacer', fg='red', command=effacerGeo).grid(row=0, column=5, padx=5, pady=5)
+    Button(geo_frame, text='Effectuer', fg='blue', command=effectuerGeo).grid(row=0, column=4, padx=5, pady=5)
+    Button(geo_frame, text='Effacer', fg='red', command=effacerGeo).grid(row=0, column=5, padx=5, pady=5)
 
-    Label(geoFrame, text="k: Nombre de succes, p: Probabilite", fg='blue').grid(row=2, column=0, padx=5, pady=5,
+    Label(geo_frame, text="k: Nombre de succes, p: Probabilite", fg='blue').grid(row=2, column=0, padx=5, pady=5,
                                                                                 columnspan=6, sticky=W)
 
     #############################################################################################################

@@ -20,7 +20,6 @@ class UnivarContinous:
             if curr_frequency > counter:
                 counter = curr_frequency
                 num = i
-
         return num
 
     @classmethod
@@ -56,13 +55,13 @@ class UnivarContinous:
         return round(v / n, 3)
 
     @classmethod
-    def median(cls, n, a, index, Linf, Lni):
+    def median(cls, n, a, index, inf_array, ni_array):
         q = 0
         freq = []
-        for i in Lni:
+        for i in ni_array:
             q += i
             freq += [q]
-        med = Linf[index] + a * (((n / 2) - freq[index - 1]) / Lni[index])
+        med = inf_array[index] + a * (((n / 2) - freq[index - 1]) / ni_array[index])
         return round(med, 4)
 
     @classmethod
@@ -84,15 +83,15 @@ class UnivarContinous:
         return mod
 
     @classmethod
-    def variance(cls, somFiXi2, mu):
-        return round((somFiXi2 - (mu ** 2)), 4)
+    def variance(cls, som_FiXi2, mu):
+        return round((som_FiXi2 - (mu ** 2)), 4)
 
     @classmethod
-    def ecartType(cls, var):
+    def ecart_type(cls, var):
         return round(sqrt(var), 4)
 
     @classmethod
-    def coefVar(cls, ecr, mu):
+    def coef_var(cls, ecr, mu):
         return round((ecr / mu) * 100, 4)
 
     @classmethod
@@ -116,15 +115,15 @@ class UnivarListBuider:
         return L
 
     @staticmethod
-    def build_ni_list(Lpop, Linf, Lsup):
-        Lpop = sorted(Lpop)
-        print("\nPop : ", Lpop)
+    def build_ni_list(pop_array, inf_array, sup_array):
+        pop_array = sorted(pop_array)
+        print("\nPop : ", pop_array)
         L = []
         count = 0
-        for e in range(len(Linf)):
+        for e in range(len(inf_array)):
             # print(e, "inf - sup : ",Linf[e]," - ",Lsup[e])
-            for i in range(len(Lpop)):
-                if (Lpop[i] >= Linf[e] and Lpop[i] <= Lsup[e]):
+            for i in range(len(pop_array)):
+                if (pop_array[i] >= inf_array[e] and pop_array[i] <= sup_array[e]):
                     count += 1
             L += [count]
             count = 0
@@ -132,29 +131,29 @@ class UnivarListBuider:
         return L
 
     @staticmethod
-    def build_fi_list(n, listNi):
+    def build_fi_list(n, list_ni):
         n = n
         L = []
-        for i in range(len(listNi)):
-            L += [round(listNi[i] / n, 3)]
+        for i in range(len(list_ni)):
+            L += [round(list_ni[i] / n, 3)]
         return L
 
     @staticmethod
-    def buildNiXiList(listNi, listXi):
+    def build_nixi_list(listNi, listXi):
         L = []
         for i in range(len(listNi)):
             L += [round(listNi[i] * listXi[i], 3)]
         return L
 
     @staticmethod
-    def buildNiXi2List(listNi, listXi):
+    def build_ni_xi2_list(listNi, listXi):
         L = []
         for i in range(len(listNi)):
             L += [round(listNi[i] * (listXi[i] ** 2), 3)]
         return L
 
     @staticmethod
-    def buildXiFiList(listXi, listFi):
+    def build_xi_fi_list(listXi, listFi):
         assert (len(listXi) == len(listFi))
         L = []
         for i in range(len(listXi)):
@@ -174,6 +173,7 @@ class UnivarListBuider:
 
 
 class BinomialDistribution:
+
     @staticmethod
     def binomiale(k, n, p):
         return format(stats.binom.pmf(k, n, p), ".2f")

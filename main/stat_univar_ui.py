@@ -99,9 +99,9 @@ def stat_univar(parentWW):
             print("listOfFi : ", listOfFi)
             print("listOfXi : ", listOfXi)
 
-            listOfNiXi = ListBuider.buildNiXiList(listOfNi, listOfXi)
-            listOfNiXi2 = ListBuider.buildNiXi2List(listOfNi, listOfXi)
-            listOfFiXi2 = ListBuider.buildXiFiList(listOfXi, listOfFi)
+            listOfNiXi = ListBuider.build_nixi_list(listOfNi, listOfXi)
+            listOfNiXi2 = ListBuider.build_ni_xi2_list(listOfNi, listOfXi)
+            listOfFiXi2 = ListBuider.build_xi_fi_list(listOfXi, listOfFi)
 
             listOfXi2 = [0] * (len(listOfXi))
             for i in range(len(listOfXi)):
@@ -162,9 +162,9 @@ def stat_univar(parentWW):
         listOfXi = ListBuider.build_xi_list(listOfLimInf, listOfLimSup)
         listOfNi = ListBuider.build_ni_list(populationList, listOfLimInf, listOfLimSup)
         listOfFi = ListBuider.build_fi_list(n, listOfNi)
-        listOfNiXi = ListBuider.buildNiXiList(listOfNi, listOfXi)
-        listOfNiXi2 = ListBuider.buildNiXi2List(listOfNi, listOfXi)
-        listOfFiXi2 = ListBuider.buildXiFiList(listOfXi, listOfFi)
+        listOfNiXi = ListBuider.build_nixi_list(listOfNi, listOfXi)
+        listOfNiXi2 = ListBuider.build_ni_xi2_list(listOfNi, listOfXi)
+        listOfFiXi2 = ListBuider.build_xi_fi_list(listOfXi, listOfFi)
 
         niMode = ListBuider.ni_modal(listOfNi)
         print("modal : ", niMode)
@@ -186,8 +186,8 @@ def stat_univar(parentWW):
 
             variance = Univar.variance(sum(listOfFiXi2), mean)
             print("variance : ", variance)
-            ecartType = Univar.ecartType(variance)
-            coefVar = Univar.coefVar(ecartType, mean)
+            ecartType = Univar.ecart_type(variance)
+            coefVar = Univar.coef_var(ecartType, mean)
 
             modeString = ""
             if (len(mode) > 1):

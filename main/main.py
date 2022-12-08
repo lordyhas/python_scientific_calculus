@@ -32,7 +32,7 @@ def presentation(screen):
 
 
 def about_app():
-    about_w = tkinter.Toplevel(mainScreen)
+    about_w = tkinter.Toplevel(main_screen)
     about_w.title("A propos")
     about_w.minsize(260, 140)
     f2 = ("Helvetica", -14,)
@@ -84,7 +84,6 @@ def fs(change=True):
 def open_guide():
     try:
         from tkPDFViewer import tkPDFViewer as pdf
-
         # Initializing tk
         pdf_view = tkinter.Toplevel()
         pdf_view.title("Manuel d'utilisation")
@@ -116,8 +115,8 @@ window.bind('<space>', lambda e: about_app())
 # panneau= tkinter.Label(window, image= photo)
 # panneau.config(bg='systemTransparent')
 # panneau.place(x="15", y="15")
-mainScreen = tkinter.Frame(window)
-mainScreen.pack()
+main_screen = tkinter.Frame(window)
+main_screen.pack()
 # ***Widgets***
 mainmenu = tkinter.Menu(window)
 
@@ -162,9 +161,9 @@ mainmenu.add_cascade(label="Format", menu=menu3)
 # mainmenu.add_cascade(label="Info ",menu=menuz)
 mainmenu.add_cascade(label="Info", menu=menu2)
 
-mainframe0 = tkinter.Frame(mainScreen)
-mainframe1 = tkinter.LabelFrame(mainScreen, text="Menu Calcul", borderwidth=2)
-mainframe2 = tkinter.Frame(mainScreen, width=240, height=180, borderwidth=5)
+mainframe0 = tkinter.Frame(main_screen)
+mainframe1 = tkinter.LabelFrame(main_screen, text="Menu Calcul", borderwidth=2)
+mainframe2 = tkinter.Frame(main_screen, width=240, height=180, borderwidth=5)
 
 # rool = tkinter.Scale(mainScreen)
 btn1 = tkinter.Button(mainframe1, text="Statistique univariée", borderwidth=5, highlightthickness=3, width=30,
