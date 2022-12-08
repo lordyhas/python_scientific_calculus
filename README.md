@@ -27,9 +27,12 @@ Work with Tkinter as GUI <br>
 
 Before use this project you need to install :
 
-- [Numpy](https://python.org)
-- [Scipy](https://python.org)
-- [Matplotlib](https://python.org)
+- [Numpy](https://numpy.org/install/)
+- [Scipy](https://scipy.org/install/)
+- [Matplotlib](https://matplotlib.org/stable/users/installing/index.html)
+
+optional install : 
+- [tkPDFViewer](https://pypi.org/project/tkPDFViewer/)
 
 For help getting started with Flutter, view our
 [online documentation](https://flutter.dev/docs), which offers tutorials,
