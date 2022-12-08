@@ -1,0 +1,31 @@
+# Miscellaneous
+*.class
+*.log
+*.pyc
+*.pyw
+*.swp
+.DS_Store
+.atom/
+.buildlog/
+.history
+.svn/
+
+*/__init__.py
+
+# IntelliJ related
+*.iml
+*.ipr
+*.iws
+.idea/
+
+# The .vscode folder contains launch configuration and tasks you configure in
+# VS Code which you may wish to be included in version control, so this line
+# is commented out by default.
+#.vscode/
+
+
+# Symbolication related
+app.*.symbols
+
+# Obfuscation related
+app.*.map.json
